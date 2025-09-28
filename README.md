@@ -24,6 +24,7 @@ currently, no X11 releases(but dyi rebuilds will support X/wayland with the righ
  
  **Orignal Rpi0/0w, too slow with only 1 core to work properly with VC4(so far)**
           **While it did work with the older stack(omx) it was only SDTV that worked anyway.**
+              *Quick Note about the old stack vs new VC4, the rpi2-cortex-a7 works better with 720p/1080p mpeg2/mpeg4 on the new stack than it did the proprietary previous stack.*
               *If you want to play with the lowest power option, thats probably the RPi2 or the Rpi Zero2W*
 
  *distros have 64bit available already in serveral flavors: Debian & derivatives, Enterprise Linux and Derivatives. I'm not trying to reproduce more builds of what already is easily available, but I may build a few 64 bit releases in the future for testing and comparison to these 32bit builds here.
