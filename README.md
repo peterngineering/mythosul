@@ -4,8 +4,12 @@ MythTV OS UltraLite
 Currently: 
 *This is bare bones mythtv v35*
 You can run minimal frontend only or dyi builds with support for all the mythtv options.
-Backend support is included and mariadb is included but comes un-enabled by default. 
-The default mode is Frontend only startup.
+Backend support is included and mariadb is included but comes un-enabled by default. While the backend support is included, be
+warned that on the older hardware, your job queues could take a VERY LONG TIME to FINISH and that can interrupt playback if using
+a all-in-one setup. For a backend, except for extreme low power uses, I recommend you use a rpi4/5 which has better
+device support for storage and it they will do job queues in a respectable timely manner. 
+
+**The default mode is Frontend only startup.**
 
 (mythplugins are in the works, but getting perl working has been as they say in the UK, "A bugger!")
 *drm/mesa3d dri have only been tested so far, but I have an original tinkerboard with a Cortex-a17 I might test.*
