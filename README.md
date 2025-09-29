@@ -42,6 +42,7 @@ Future planning does include x86_64 version with DRM support(NO X11) for common 
  
  **Orignal Rpi0/0w, too slow with only 1 core to work properly with VC4(so far)**
           **While it did work with the older stack(omx) it was only SDTV that worked anyway. The single core ARM6(NO NEON) is JUST TOO UNDERPOWERED FOR THIS PROJECT, SO FAR.**
+          If you want to find something to use that ole rpi0/0w for you can try my ohmxplayer project or head over to dietpi for a vast array of software availability.
               *Quick Note about the old stack vs new VC4, the rpi2-cortex-a7 works better with 720p/1080p mpeg2/mpeg4 on the new stack than it did the proprietary previous stack.*
               *If you want to play with the lowest power option, thats probably the RPi2 or the Rpi Zero2W* 
 
