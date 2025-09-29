@@ -49,7 +49,7 @@ Regarding Deinterlacing options within MythTV playback profiles and other genera
     On the older hardware you definately want to choose "LOW quality" for the double rate options or else "Video Playback Stuttering" will occur. With the forthcoming VC4-V3D rpi4/5 builds this *shouldn't* matter as much. While on the topic of good playback, using Wifi: You need a good strong stable signal or you will get substantial "Video Playback Stuttering" 
 
 
- *distros have 64bit available already in serveral flavors: Debian & derivatives, Enterprise Linux and Derivatives. I'm not trying to reproduce more builds of what already is easily available, but I may build a few 64 bit releases in the future for testing and comparison to these 32bit builds here.
+ *distros have 64bit available already in serveral flavors: Debian & derivatives, Enterprise Linux and Derivatives. I'm not trying to reproduce more builds of what already is easily available, but I may build a few 64 bit releases in the future for testing and comparison to these 32bit builds here. Barring the planned x86_64 generic build, I don't plan on releasing any pure64bit builds anytime soon. Why would I, see previous note about distros already providing 64bit versions.
 
 DIY'er's/rebuilders Note:  Only the GCC toolchains are known to work, this is a mythtv specific limitation as my trials have shown all other packages upstream seem to build fine with Musl/UCLIBc as well, but YMMV.
 
