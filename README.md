@@ -1,4 +1,4 @@
-**first public release soon, then I'll move some of this to wiki**
+moving this to the wiki section
 
 # mythosul
 MythTV OS UltraLite
