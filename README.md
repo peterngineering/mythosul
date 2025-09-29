@@ -3,7 +3,7 @@ MythTV OS UltraLite
 
 Currently: 
 *This is bare bones mythtv v35* 
-*FOR NOW: Only working on RPi's*
+*FOR NOW: Only working on 32bit capable RPi's*
 
 Readup for my mishmash of devnotes and planning for rebuilds.
 
