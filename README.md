@@ -6,7 +6,7 @@ Currently:
 
 *FOR NOW: Only working on 32bit capable RPi's*
 
-Readup for my mishmash of devnotes and planning for rebuilds.
+Readup for my mishmash of devnotes and planning for rebuilds. Luckily for you , there will be NO TEST on what all I have said here about notes!
 
 You can build your own for previous versions as you see fit but you will have to do your own back
 porting. I started this project from the old stack building on version 28 and worked my way up to fixes35. Following upstream just below 
