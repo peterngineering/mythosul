@@ -1,3 +1,5 @@
+**first public release soon, then I'll move some of this to wiki**
+
 # mythosul
 MythTV OS UltraLite
 
