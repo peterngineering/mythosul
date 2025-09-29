@@ -31,7 +31,7 @@ currently, no X11 releases(but dyi rebuilds will support X/wayland with the righ
  *some of the following are 64bit/32bit chips* but the userland thus far will only be in 32bit.
     
 **Tested/Working:**
-* Rpi2 Cortex-a7 models
+* Rpi2 Quad-Core Cortex-a7 models
 * Rpi3(also includes Rpi02W, RPi3A) Cortex-a53 models
 
  Soon to be tested 32bit capable models:
