@@ -2,7 +2,8 @@
 MythTV OS UltraLite
 
 Currently: 
-*This is bare bones mythtv v35*
+*This is bare bones mythtv v35* 
+*FOR NOW: Only working on RPi's*
 
 You can build your own for previous versions as you see fit but you will have to do your own back
 porting. I started this project from the old stack building on version 28 and worked my way up to fixes35. Following upstream just below 
@@ -31,6 +32,8 @@ currently, no X11 releases(but dyi rebuilds will support X/wayland with the righ
  Soon to be tested 32bit capable models:
  * Rpi4 Cortex-a72
  * Rpi5 Cortex-a73
+
+Future planning does include x86_64 version with DRM support(NO X11) for common hw, its just not a priority till the Pi's are worked out.
  
  **Orignal Rpi0/0w, too slow with only 1 core to work properly with VC4(so far)**
           **While it did work with the older stack(omx) it was only SDTV that worked anyway.**
