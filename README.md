@@ -5,6 +5,8 @@ Currently:
 *This is bare bones mythtv v35* 
 *FOR NOW: Only working on RPi's*
 
+Readup for my mishmash of devnotes and planning for rebuilds.
+
 You can build your own for previous versions as you see fit but you will have to do your own back
 porting. I started this project from the old stack building on version 28 and worked my way up to fixes35. Following upstream just below 
 the dev release is the easiest to maintain in my experiences. This being said, if your a diehard for version's 33/34 cause your distro only has
