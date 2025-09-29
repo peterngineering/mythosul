@@ -3,6 +3,12 @@ MythTV OS UltraLite
 
 Currently: 
 *This is bare bones mythtv v35*
+
+You can build your own for previous versions as you see fit but you will have to do your own back
+porting. I started this project from the old stack building on version 28 and worked my way up to fixes35. Following upstream just below 
+the dev release is the easiest to maintain in my experiences. This being said, if your a diehard for version's 33/34 cause your distro only has
+version Xyz in its repos, then you can easily make those versions with this kit work for yourself with little effort as only a couple 'gotcha's' will get in your way.
+
 You can run minimal frontend only or dyi builds with support for all the mythtv options.
 Backend support is included and mariadb is included but comes un-enabled by default. While the backend support is included, be
 warned that on the older hardware, your job queues could take a VERY LONG TIME to FINISH and that can interrupt playback if using
@@ -40,6 +46,7 @@ Regarding Deinterlacing options within MythTV playback profiles and other genera
 DIY'er's/rebuilders Note:  Only the GCC toolchains are known to work, this is a mythtv specific limitation as my trials have shown all other packages upstream seem to build fine with Musl/UCLIBc as well, but YMMV.
 
 These builds are for my amusement and testing/learning and no warranty is given or implied. 
-You may ask for a feature or improvement but I may not be able to provide all and may refer you to build your own and test in order for me to impliment it, unless its very trivial ofc.
+You may ask for a feature or improvement but I may not be able to provide all and may refer you to build your own and test in order for me to impliment it first, if its complex.
+It's very likely a DYI/rebuilder will run into a trivial situation they want option X from mythtv and it doesnt work right because I didnt test that, let me know which those you find and I will include/patch those fixes into this with little fuss.
 
 
