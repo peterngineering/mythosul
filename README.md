@@ -22,7 +22,9 @@ device support for storage and it they will do job queues in a respectable timel
 **The default mode is Frontend only startup.**
 
 (mythplugins are in the works, but getting perl working has been as they say in the UK, "A bugger!")
+
 *drm/mesa3d dri have only been tested so far, but I have an original tinkerboard with a Cortex-a17 I might test.*
+
 Also note:
 currently, no X11 releases(but dyi rebuilds will support X/wayland with the right options chosen),
 **currently working only on 32bit versions and only hardware that is capable of 32bit**
