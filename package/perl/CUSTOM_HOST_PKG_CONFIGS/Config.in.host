@@ -1,0 +1,114 @@
+config BR2_PACKAGE_HOST_PERL
+	bool "host perl"
+	help
+	  The perl language interpreter. Host package.
+
+	  http://www.perl.org/
+
+if BR2_PACKAGE_HOST_PERL
+
+config BR2_PACKAGE_HOST_PERL_CLONE
+	bool "perl-clone"
+	default y
+	help
+	  clone module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	bool "perl-module-build"
+	default y
+	help
+	  build module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_DBI
+	bool "perl-dbi"
+	select BR2_PACKAGE_HOST_PERL_CLONE 
+	help
+	  dbi module for host Perl
+
+config BR2_PACKAGE_HOST_PERL_DBI_DBD_MYSQL
+	bool "perl-dbi-dbd-mysql"
+	select BR2_PACKAGE_HOST_PERL_CLONE 
+	select BR2_PACKAGE_HOST_PERL_DBI 
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	help
+	help
+	  dbi dbd mysql module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_HTTP_MESSAGE
+	bool "perl-http-message"
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	help
+	  http message module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_IO_INTERFACE
+	bool "perl-io-interface"
+	#select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	help
+	  IO interfaace module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_LIBWWW_PERL
+	bool "perl-libwww-perl"
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	help
+	  www module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_HTTP_DATE
+	bool "perl-http-date"
+	help
+	  perl-http-date module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_DATE_MANIP
+	bool "perl-date-manip"
+	help
+	  perl-date-manip module for host Perl.
+	
+config BR2_PACKAGE_HOST_PERL_SOCKET6
+	bool "perl-socket6"
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	#select BR2_PACKAGE_HOST_PERL_IO_INTERFACE
+	help
+	  socket6 module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_IO_SOCKET_INET6
+	bool "perl-io-socket-inet6"
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	#select BR2_PACKAGE_HOST_PERL_IO_INTERFACE
+	select BR2_PACKAGE_HOST_PERL_SOCKET6 
+	help
+	  "(deprecated) perl-io-socket-inet6 module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_NET_UPNP
+	bool "perl-net-upnp"
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	help
+	  upnp module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_URI
+	bool "perl-uri"
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	help
+	  uri module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_TRY_TINY
+	bool "perl-try-tiny"
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	help
+	  try-tiny module for host Perl.
+
+config BR2_PACKAGE_HOST_PERL_XML_SIMPLE
+	bool "perl-xml-simple"
+	select BR2_PACKAGE_HOST_PERL_CLONE
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	help
+	  XML Simple module for host Perl.
+
+
+endif

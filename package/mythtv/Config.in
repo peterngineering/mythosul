@@ -1,0 +1,403 @@
+config BR2_PACKAGE_MYTHTV_ARCH_SUPPORTS
+	bool
+	default y if BR2_PACKAGE_FFMPEG_ARCH_SUPPORTS
+	
+#comment "mythtv needs a glibc toolchain w/ C++, threads, wchar, dynamic library, gcc >= 9.x, host gcc >= 9.x"
+#	depends on BR2_PACKAGE_MYTHTV_ARCH_SUPPORTS
+#	depends on BR2_TOOLCHAIN_HAS_SYNC_4
+#	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_TOOLCHAIN_HAS_THREADS \
+#		|| !BR2_USE_WCHAR || !BR2_SHARED_LIBS \
+#		|| !BR2_TOOLCHAIN_GCC_AT_LEAST_9 \
+#		|| !BR2_HOST_GCC_AT_LEAST_9 \
+#		|| BR2_TOOLCHAIN_USES_MUSL \
+#		|| BR2_TOOLCHAIN_USES_UCLIBC
+
+
+#validated for mythtv v35 only
+menuconfig BR2_PACKAGE_MYTHTV
+	bool "mythtv"
+	depends on BR2_PACKAGE_MYTHTV_ARCH_SUPPORTS
+	select BR2_PACKAGE_QT5BASE
+	select BR2_PACKAGE_QT5BASE_CONCURRENT
+	select BR2_PACKAGE_QT5BASE_FONTCONFIG
+	select BR2_PACKAGE_QT5BASE_GUI
+	select BR2_PACKAGE_QT5BASE_WIDGETS
+	select BR2_PACKAGE_QT5BASE_OPENGL
+	select BR2_PACKAGE_QT5BASE_SQL
+	select BR2_PACKAGE_QT5BASE_MYSQL	
+	select BR2_PACKAGE_TAGLIB
+	select BR2_PACKAGE_LIBZIP
+	select BR2_PACKAGE_LIBSAMPLERATE
+	select BR2_PACKAGE_LIBSOUNDTOUCH
+	select BR2_PACKAGE_LIBZIP
+	select BR2_PACKAGE_LZO
+	help
+	   mythtv 
+
+if BR2_PACKAGE_MYTHTV
+	
+config BR2_PACKAGE_MYTHTV_GPL
+	bool "Enable GPL code"
+	help
+	  allow use of GPL code, the resulting libs and binaries will
+	  be under GPL
+
+config BR2_PACKAGE_MYTHTV_NONFREE
+	bool "Enable nonfree code"
+	help
+	  allow use of nonfree code, the resulting libs and binaries
+	  will be unredistributable
+
+
+config BR2_PACKAGE_MYTHTV_FFMPEG
+	bool "Build ffmpeg (the command line application)"
+	help
+	  ffmpeg is a very fast video and audio converter.
+	  It can also grab from a live audio/video source.
+
+if BR2_PACKAGE_MYTHTV_FFMPEG
+
+config BR2_PACKAGE_MYTHTV_FFMPEG_FFPLAY
+	bool "Build ffplay"
+	depends on !BR2_STATIC_LIBS # sdl2
+	select BR2_PACKAGE_SDL2
+	help
+	  FFplay is a very simple and portable media player using the
+	  mythtv libraries and the SDL library.
+	  It is mostly used as a testbed for the various mythtv APIs.
+
+comment "ffplay needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
+
+
+config BR2_PACKAGE_MYTHTV_FFMPEG_FFPROBE
+	bool "Build ffprobe"
+	help
+	  FFprobe is a utility to determine the audio and video
+	  characteristics of a container file.
+endif
+
+
+
+config BR2_PACKAGE_MYTHTV_INPUT
+	bool "Input Support"
+	default y
+	#prompt "Mythtv Input Devices"
+
+if BR2_PACKAGE_MYTHTV_INPUT
+
+config  BR2_PACKAGE_MYTHTV_INPUT_JOYSTICK_MENU
+	bool "Build joystick_menu support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_LIRC
+	bool "Build lirc support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_LIBCEC
+	bool "Build libCEC support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_V4L2
+	bool "Build v4l2 support"
+	help
+	   Build v4l2 support
+
+config BR2_PACKAGE_MYTHTV_INPUT_SATIP
+	bool "Build Sat IP support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_FIREWIRE
+	bool "Build firewire support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_DVB
+	bool "Build dvb support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_HDHOMERUN
+	select BR2_PACKAGE_LIBHDHOMERUN
+	bool "Build hdhomerun support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_VBOX
+	bool "Build vbox support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_CETON
+	bool "Build ceton support"
+	help
+	  Optional mythtv hw input device
+
+config BR2_PACKAGE_MYTHTV_INPUT_ASI
+	bool "Build asi support"
+	help
+	  Optional mythtv hw input device
+endif
+
+
+config BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT
+	select BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM
+	select  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL
+	bool "Video Output Support"
+	default y
+
+if BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT
+
+	
+config BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_X11
+       bool "Build x11/xrandr support"
+	help
+	  x11/xrandr support
+	
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_VAAPI
+         bool "Build vaapi support"
+	 depends on BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_X11
+	 help
+	   vaapi support
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_VDPAU
+         bool "Build vdpau support"
+	 depends on BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_X11
+	 help
+	   vdpau support
+	
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM
+	 select BR2_PACKAGE_LIBDRM
+         bool "Build DRM support"
+	 default y
+	 help
+	   drm support
+
+
+#config  BR2_PACKAGE_MYTHTV_MISC_DRM_QT_INTEGRATION
+#         bool "Build DRM QT Integration support"
+#	 select BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM
+#	 help
+#	   	drm qt integration support
+#
+#config  BR2_PACKAGE_MYTHTV_MISC_WAYLAND_EXTRAS
+#         bool "Build Wayland Extras support"
+#	 depends on BR2_PACKAGE_MYTHTV_MISC_DRM_QT_INTEGRATION
+#	 help
+#		Wayland Extras
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_VIDEO4LINUX
+         bool "Build Video4Linux Codecs support"
+	 depends on BR2_PACKAGE_MYTHTV_INPUT_V4L2
+	 select BR2_PACKAGE_LIBV4L
+	 help
+	   Video4Linux Codec support
+	
+#config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_MMAL
+#	 depends on BR2_PACKAGE_RPI_USERLAND
+#         bool "Build MMAL support"
+#	 help
+#	   	MMAL support
+#comment "selecting MMAL conflicts with libdrm/vc4"
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL
+         bool "Build OpenGL support"
+	 default y
+	 help
+	   OpenGL support
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_EGL
+	 select BR2_PACKAGE_MESA3D_OPENGL_ES
+	 select BR2_PACKAGE_QT5BASE_EGLFS
+	 select BR2_PACKAGE_QT5BASE_OPENGL_ES2
+         bool "Build EGL support"
+	 default y
+	 help
+	   EGL support
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_VULKAN
+         bool "Build Vulkan support"
+	 help
+	    Vulkan support
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_MHEG
+         bool "Build MHEG support"
+	 help
+	   MHEG support
+
+config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_LIBASS
+         bool "Build libass support"
+	 select BR2_PACKAGE_LIBASS
+	 help
+	   libass subtitle support
+	
+endif
+
+
+config BR2_PACKAGE_MYTHTV_SOUND_OUTPUT
+	bool "SOUND Output Support"
+	default y
+
+if BR2_PACKAGE_MYTHTV_SOUND_OUTPUT
+
+
+# config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_PIPEWIRE
+#         bool "Build Pipewire support"
+#	  help
+#	    Pipewire support
+
+config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_PULSE
+         bool "Build PulseAudio support"
+	 help
+	   PulseAudio support
+
+config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_OSS
+         bool "Build OSS support"
+	 default y
+	 help
+	   OSS support
+	
+config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_ALSA
+         bool "Build ALSA support"
+	 select BR2_PACKAGE_ALSA_LIB
+	 default y
+	 help
+	   ALSA support
+
+config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_JACK
+	 select BR2_PACKAGE_JACK1
+         bool "Build JACK support"
+	 help
+	   JACK support
+endif
+
+
+if BR2_PACKAGE_MYTHTV_MISC
+
+config  BR2_PACKAGE_MYTHTV_MISC_LIXML2
+         bool "Build libxml2 support"
+	 select BR2_PACKAGE_LIBXML2
+	 help
+	   libxml2 support
+	
+config  BR2_PACKAGE_MYTHTV_MISC_LIBDNS_SD_BONJOUR
+         bool "Build libdns_sd(Bonjour) support"
+	 help
+           libdns_sd(Bonjour) support
+
+config  BR2_PACKAGE_MYTHTV_MISC_LIBCRYPTO
+         bool "Build libcrypto support"
+	 help
+	   libcrypto support
+
+config  BR2_PACKAGE_MYTHTV_MISC_GNUTLS
+	 bool "Build gnutls support"
+ 	 select BR2_PACKAGE_GNUTLS
+	 help
+	   gnuutls support
+
+config  BR2_PACKAGE_MYTHTV_MISC_LIBEXIV
+         bool "Build libexiv support"
+	 help
+           libexiv support
+
+config  BR2_PACKAGE_MYTHTV_MISC_LIBBLURAY
+         bool "Build bluray support"
+	 select BR2_PACKAGE_LIBBLURAY
+	 default y
+	 help
+           bluray support
+
+config  BR2_PACKAGE_MYTHTV_MISC_SYSTEMD_NOTIFY
+         bool "Build systemd_notify support"
+	 select BR2_INIT_SYSTEMD 
+	 help
+           systemd_notify support
+
+config  BR2_PACKAGE_MYTHTV_MISC_SYSTEMD_JOURNAL
+         bool "Build systemd_journal support"
+	 select BR2_INIT_SYSTEMD 
+	 help
+           systemd_journal support
+endif
+
+
+config BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS
+	bool "External Codec Options"
+
+if BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_MP3LAME
+         bool "Build mp3lame support"
+	 select BR2_PACKAGE_LAME
+	 help
+	   mp3lame support
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_XVID
+         bool "Build xvid support"
+	 help
+	   xvid support
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_x264
+         bool "Build x264 support"
+	 select B2_PACKAGE_x264
+	 help
+	   x264 support
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_x265
+         bool "Build x265 (HEVC) support"
+	 select BR2_PACKAGE_x265
+	 help
+	   "x265 (HEVC) support"
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBAOM
+         bool "Build libaom (AV1) support"
+	 help
+	   "aom (AV1) support"
+
+config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBDAV1D
+         bool "Build libdav1d (AV1) support"
+	 select BR2_PACKAGE_DAV1D
+	 help
+	   "libdav1d (AV1) support"
+endif
+
+	 
+config BR2_PACKAGE_MYTHTV_BINDINGS
+	bool "Bindings"
+
+if BR2_PACKAGE_MYTHTV_BINDINGS
+
+config  BR2_PACKAGE_MYTHTV_BINDINGS_PERL
+        bool "Build perl bindings support"
+	 help
+	   Optional mythtv perl bindings
+
+config  BR2_PACKAGE_MYTHTV_BINDINGS_PHP
+        bool "Build php bindings support"
+	help
+	  Optional mythtv binding
+
+config  BR2_PACKAGE_MYTHTV_BINDINGS_PYTHON
+        bool "Build python bindings support"
+	select BR2_PACKAGE_PYTHON3
+        help
+          Optional mythtv binding
+endif
+
+config BR2_PACKAGE_MYTHTV_EXTRACONF
+	string "Additional parameters for ./configure"
+	default ""
+	help
+	  Extra parameters that will be appended to mythtv's
+	  ./configure commandline.
+
+if BR2_PACKAGE_MYTHTV
+source "package/mythtv/mythplugins/Config.in"
+endif
+
+endif

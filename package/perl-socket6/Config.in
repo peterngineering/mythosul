@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PERL_SOCKET6
+	bool "perl-socket6"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_IO_INTERFACE # runtime
+	help
+	   "Object interface for domain sockets"	
+
+comment "perl-socket6 needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

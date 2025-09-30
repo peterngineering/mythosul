@@ -1,0 +1,33 @@
+# Please note that this is only a sample, we recommend you to change it to fit
+# your needs.
+# You should override this file using BR2_PACKAGE_RPI_FIRMWARE_CONFIG_FILE.
+# See http://buildroot.org/manual.html#rootfs-custom
+# and http://elinux.org/RPiconfig for a description of config.txt syntax
+
+start_file=start.elf
+fixup_file=fixup.dat
+
+kernel=zImage
+
+# To use an external initramfs file
+#initramfs rootfs.cpio.gz
+
+# Disable overscan assuming the display supports displaying the full resolution
+# If the text shown on the screen disappears off the edge, comment this out
+disable_overscan=1
+
+gpu_mem=256
+
+#this overclock works on testd on rpi2 v2709, may void warranty 
+#if used with:   turbo=1
+
+cpu_freq=1000
+sdram_freq=500
+core_freq=500
+over_voltage=2
+temp_limit=75
+
+dtparam=audio=on
+dtoverlay=vc4-kms-v3d
+max_framebuffers=2
+

@@ -1,0 +1,56 @@
+diff --git a/mythtv/configure b/mythtv/configure
+index 7e966ef..c535dc2 100755
+--- a/mythtv/configure
++++ b/mythtv/configure
+@@ -5395,7 +5395,7 @@ if enabled taglib; then
+         else
+             tagprefix=${sysroot}`$pkg_config --variable=prefix taglib`
+         fi
+-        tagincludes="-I${tagprefix}/include"
++        tagincludes=`$pkg_config --cflags-only-I taglib`
+         taglibs=`$pkg_config --libs taglib`
+         if test $target_os = android ; then
+             taglibs="$taglibs -lz -lm"
+@@ -6268,7 +6268,7 @@ int main(void) {
+ EOF
+ 
+ if enabled taglib; then
+-    taglib_include=`$pkg_config --variable=prefix taglib`/include/taglib
++    taglib_include=`$pkg_config --cflags-only-I taglib`
+     taglib_libs=`$pkg_config --libs taglib`
+ fi
+ 
+@@ -6767,10 +6767,24 @@ if enabled gnutls; then
+     ffopts="$ffopts --enable-gnutls"
+ fi
+ 
++if enabled small; then
++    ffopts="$ffopts --enable-small"
++fi
++
+ if enabled lto; then
+     ffopts="$ffopts --enable-lto"
+ fi
+ 
++if disabled armv5te; then
++    ffopts="$ffopts --disable-armv5te"
++fi
++
++if disable debug; then
++    ffopts="$ffopts --disable-debug"
++fi
++
++
++
+ ffmpeg_extra_cflags="$extra_cflags -w"
+ if test "$ID" = "raspbian"; then
+     case $cpu in
+@@ -6788,6 +6802,8 @@ append ffopts \
+ --disable-podpages  \
+ --disable-doc \
+ --disable-nvenc \
++--disable-hardcoded-tables \
++--disable-runtime-cpudetect \
+ --enable-shared \
+ --disable-static \
+ --enable-gpl \

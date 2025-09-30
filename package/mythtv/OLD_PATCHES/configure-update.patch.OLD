@@ -1,0 +1,33 @@
+diff --git a/mythtv/configure b/mythtv/configure
+index 7e966ef..cc7eaad 100755
+--- a/mythtv/configure
++++ b/mythtv/configure
+@@ -6771,6 +6771,18 @@ if enabled lto; then
+     ffopts="$ffopts --enable-lto"
+ fi
+ 
++if disabled armv5te; then
++    ffopts="$ffopts --disable-armv5te"
++fi
++
++if enable small; then
++    ffopts="$ffopts --enable-small"
++fi
++
++if disable debug; then
++    ffopts="$ffopts --disable-debug"
++fi
++
+ ffmpeg_extra_cflags="$extra_cflags -w"
+ if test "$ID" = "raspbian"; then
+     case $cpu in
+@@ -6785,6 +6797,8 @@ append ffopts \
+ --enable-stripping \
+ --strip=\'"echo skipping strip"\' \
+ --disable-manpages  \
++--disable-hardcoded-tables \
++--disable-runtime-cpudetect \
+ --disable-podpages  \
+ --disable-doc \
+ --disable-nvenc \
+

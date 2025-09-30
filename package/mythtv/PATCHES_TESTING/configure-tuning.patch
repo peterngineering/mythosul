@@ -1,0 +1,44 @@
+diff --git a/mythtv/configure b/mythtv/configure
+index 12a9579..97209a8 100755
+--- a/mythtv/configure
++++ b/mythtv/configure
+@@ -2071,7 +2071,7 @@ host_cc_default="gcc"
+ doxygen_default="doxygen"
+ install="install"
+ ln_s_default="ln -s -f"
+-nm_default="nm -g"
++nm_default="nm"
+ pkg_config_default=pkg-config
+ ranlib_default="ranlib"
+ version_script='--version-script'
+@@ -4531,7 +4531,7 @@ append CCONFIG "$compile_type"
+ if test x$compile_type = x"release" ; then
+     add_cflags   -DNDEBUG
+     add_cxxflags -DNDEBUG
+-    check_cxxflags -O2
++    check_cxxflags -Os
+ elif test x$compile_type = x"profile" ; then
+     add_cflags   -DNDEBUG
+     add_cxxflags -DNDEBUG
+@@ -6402,6 +6402,9 @@ if enabled drm; then
+     ffopts="$ffopts --enable-libdrm"
+ fi
+ 
++if disable debug; then
++    ffopts="$ffopts --disable-debug"
++fi
+ 
+ if test "$ID" = "raspbian"; then
+     case $cpu in
+@@ -6423,7 +6426,10 @@ append ffopts \
+ --extra-cflags=\'"$ffmpeg_extra_cflags"\' \
+ --extra-ldflags=\'"$ffmpeg_extra_ldflags"\' \
+ --extra-libs=\'"$ffmpeg_extra_ldflags"\' \
+---disable-stripping \
++--enable-stripping \
++--enable-small \
++--disable-runtime-cpudetect \
++--disable-hardcoded-tables \
+ --disable-manpages  \
+ --disable-podpages  \
+ --disable-doc \

@@ -1,0 +1,57 @@
+menuconfig BR2_PACKAGE_MYTHTV_MYTHPLUGINS
+	bool "mythplugins"
+	depends on BR2_PACKAGE_MYTHTV
+	help
+	   mythplugins
+
+if BR2_PACKAGE_MYTHTV_MYTHPLUGINS
+
+config BR2_PACKAGE_MYTHTV_MYTHPLUGINS_PLUGIN1
+	bool "Build plugin1"
+	#depends on 
+	#select BR2_PACKAGE_x
+	help
+	  Plugin1 Description
+
+comment "plugin1 comment"
+	#depends on BR2_STATIC_LIBS
+
+config BR2_PACKAGE_MYTHTV_MYTHPLUGINS_PLUGIN2
+	bool "Build plugin2"
+	#depends on 
+	#select BR2_PACKAGE_x
+	help
+	  Plugin2 Description
+
+comment "plugin2 comment"
+	#depends on BR2_STATIC_LIBS
+
+config BR2_PACKAGE_MYTHTV_MYTHPLUGINS_PLUGIN3
+	bool "Build plugin3"
+	#depends on 
+	#select BR2_PACKAGE_x
+	help
+	  Plugin3 Description
+
+comment "plugin3 comment"
+	#depends on BR2_STATIC_LIBS
+
+
+
+config BR2_PACKAGE_MYTHTV_MYTHPLUGINS_PLUGIN4
+	bool "Build plugin4"
+	#depends on 
+	#select BR2_PACKAGE_x
+	help
+	  Plugin4 Description
+
+comment "plugin4 comment"
+	#depends on BR2_STATIC_LIBS
+
+endif
+
+
+
+
+
+

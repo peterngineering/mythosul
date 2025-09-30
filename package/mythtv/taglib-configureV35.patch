@@ -1,0 +1,22 @@
+diff --git a/mythtv/configure b/mythtv/configure
+index 721e821..12a9579 100755
+--- a/mythtv/configure
++++ b/mythtv/configure
+@@ -5116,7 +5116,7 @@ if enabled taglib; then
+         else
+             tagprefix=${sysroot}`$pkg_config --variable=prefix taglib`
+         fi
+-        tagincludes="-I${tagprefix}/include"
++	tagincludes=`$pkg_config --cflags-only-I taglib`
+         taglibs=`$pkg_config --libs taglib`
+         if test $target_os = android ; then
+             taglibs="$taglibs -lz -lm"
+@@ -5949,7 +5949,7 @@ int main(void) {
+ EOF
+ 
+ if enabled taglib; then
+-    taglib_include=`$pkg_config --variable=prefix taglib`/include/taglib
++    taglib_include=`$pkg_config --cflags-only-I taglib`
+     taglib_libs=`$pkg_config --libs taglib`
+ fi
+ 

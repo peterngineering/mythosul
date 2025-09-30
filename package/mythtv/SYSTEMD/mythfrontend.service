@@ -1,0 +1,28 @@
+[Unit]
+Description=MythTV frontend service
+After=network-online.target time-sync.target
+
+[Service]
+Type=simple
+
+# Default setting assumes a system wide install. Otherwise it should be set to 
+# the folder containing the .mythtv subfolder containing the config.xml file
+Environment=MYTHCONFDIR=/home/mythtv/.mythtv
+
+# systemd changes execution from the calling user (possibly root) to this user
+# if you have permissions problems or obscure errors try logging in as mythtv
+User=mythtv
+
+ExecStartPre=/home/mythtv/bin/performance.sh
+ExecStart=/usr/bin/mythfrontend --logpath /tmp
+
+# Whether systemd will continue over-watch and restart on any halt
+#Restart=always
+
+# try uncommenting the following lines:
+Restart=on-error
+StartLimitBurst=1
+StartLimitInterval=15
+
+[Install]
+WantedBy=multi-user.target

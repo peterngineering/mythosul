@@ -1,0 +1,142 @@
+diff --git a/mythtv/libs/libmythmetadata/metaioflacvorbis.cpp b/mythtv/libs/libmythmetadata/metaioflacvorbis.cpp
+index 05fa685..26f5a80 100644
+--- a/mythtv/libs/libmythmetadata/metaioflacvorbis.cpp
++++ b/mythtv/libs/libmythmetadata/metaioflacvorbis.cpp
+@@ -6,7 +6,7 @@
+ #include <QBuffer>
+ 
+ // Taglib
+-#include <xiphcomment.h>
++#include <taglib/xiphcomment.h>
+ 
+ // libmythmetadata
+ #include "metaioflacvorbis.h"
+diff --git a/mythtv/libs/libmythmetadata/metaioflacvorbis.h b/mythtv/libs/libmythmetadata/metaioflacvorbis.h
+index de6a076..4935fda 100644
+--- a/mythtv/libs/libmythmetadata/metaioflacvorbis.h
++++ b/mythtv/libs/libmythmetadata/metaioflacvorbis.h
+@@ -6,7 +6,7 @@
+ #include "musicmetadata.h"
+ 
+ // Taglib
+-#include <flacfile.h>
++#include <taglib/flacfile.h>
+ 
+ using TagLib::Tag;
+ using TagLib::String;
+diff --git a/mythtv/libs/libmythmetadata/metaioid3.cpp b/mythtv/libs/libmythmetadata/metaioid3.cpp
+index 12b942d..1cb92f0 100644
+--- a/mythtv/libs/libmythmetadata/metaioid3.cpp
++++ b/mythtv/libs/libmythmetadata/metaioid3.cpp
+@@ -11,8 +11,8 @@
+ #include "libmythbase/mythcorecontext.h"
+ 
+ // Taglib
+-#include <flacfile.h>
+-#include <mpegfile.h>
++#include <taglib/flacfile.h>
++#include <taglib/mpegfile.h>
+ 
+ // libmythmetadata
+ #include "metaioid3.h"
+diff --git a/mythtv/libs/libmythmetadata/metaioid3.h b/mythtv/libs/libmythmetadata/metaioid3.h
+index 304c151..6cd211f 100644
+--- a/mythtv/libs/libmythmetadata/metaioid3.h
++++ b/mythtv/libs/libmythmetadata/metaioid3.h
+@@ -6,17 +6,17 @@
+ #include "musicmetadata.h"
+ 
+ // Taglib
+-#include <id3v1tag.h>
+-#include <id3v2tag.h>
++#include <taglib/id3v1tag.h>
++#include <taglib/id3v2tag.h>
+ #ifdef Q_OS_WIN
+ // The above indirectly includes winuser.h, which unconditionally
+ // redefines the string SendMessage to SendMessageA.
+ #undef SendMessage
+ #endif
+-#include <textidentificationframe.h>
+-#include <attachedpictureframe.h>
+-#include <popularimeterframe.h>
+-#include <tfile.h>
++#include <taglib/textidentificationframe.h>
++#include <taglib/attachedpictureframe.h>
++#include <taglib/popularimeterframe.h>
++#include <taglib/tfile.h>
+ 
+ // QT
+ #include <QList>
+diff --git a/mythtv/libs/libmythmetadata/metaiooggvorbis.h b/mythtv/libs/libmythmetadata/metaiooggvorbis.h
+index 213d339..2caf0ee 100644
+--- a/mythtv/libs/libmythmetadata/metaiooggvorbis.h
++++ b/mythtv/libs/libmythmetadata/metaiooggvorbis.h
+@@ -6,7 +6,7 @@
+ #include "musicmetadata.h"
+ 
+ // Taglib
+-#include <vorbisfile.h>
++#include <taglib/vorbisfile.h>
+ 
+ using TagLib::Tag;
+ using TagLib::String;
+diff --git a/mythtv/libs/libmythmetadata/metaiotaglib.cpp b/mythtv/libs/libmythmetadata/metaiotaglib.cpp
+index b894805..d11acd8 100644
+--- a/mythtv/libs/libmythmetadata/metaiotaglib.cpp
++++ b/mythtv/libs/libmythmetadata/metaiotaglib.cpp
+@@ -5,10 +5,10 @@
+ #include "libmythbase/mythlogging.h"
+ 
+ // Taglib
+-#include <audioproperties.h>
+-#include <tag.h>
+-#include <tstring.h>
+-#include <fileref.h>
++#include <taglib/audioproperties.h>
++#include <taglib/tag.h>
++#include <taglib/tstring.h>
++#include <taglib/fileref.h>
+ 
+ // libmythmetadata
+ #include "metaiotaglib.h"
+diff --git a/mythtv/libs/libmythmetadata/metaiotaglib.h b/mythtv/libs/libmythmetadata/metaiotaglib.h
+index d134b68..87775bb 100644
+--- a/mythtv/libs/libmythmetadata/metaiotaglib.h
++++ b/mythtv/libs/libmythmetadata/metaiotaglib.h
+@@ -6,7 +6,7 @@
+ #include "musicmetadata.h"
+ 
+ // Taglib
+-#include <tfile.h>
++#include <taglib/tfile.h>
+ 
+ using TagLib::File;
+ using TagLib::Tag;
+diff --git a/mythtv/libs/libmythmetadata/metaiowavpack.cpp b/mythtv/libs/libmythmetadata/metaiowavpack.cpp
+index baa93c2..0759151 100644
+--- a/mythtv/libs/libmythmetadata/metaiowavpack.cpp
++++ b/mythtv/libs/libmythmetadata/metaiowavpack.cpp
+@@ -2,8 +2,8 @@
+ 
+ #include <QtGlobal> // before taglib includes
+ 
+-#include <apetag.h>
+-#include <apeitem.h>
++#include <taglib/apetag.h>
++#include <taglib/apeitem.h>
+ 
+ #include "libmyth/mythcontext.h"
+ 
+diff --git a/mythtv/libs/libmythmetadata/metaiowavpack.h b/mythtv/libs/libmythmetadata/metaiowavpack.h
+index d94f2b5..2fa6516 100644
+--- a/mythtv/libs/libmythmetadata/metaiowavpack.h
++++ b/mythtv/libs/libmythmetadata/metaiowavpack.h
+@@ -6,7 +6,7 @@
+ #include "musicmetadata.h"
+ 
+ // Taglib
+-#include <wavpackfile.h>
++#include <taglib/wavpackfile.h>
+ 
+ using TagLib::Tag;
+ using TagLib::String;

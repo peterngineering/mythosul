@@ -1,0 +1,41 @@
+#!/bin/sh
+PROG="/usr/bin/mythbackend"
+test -x ${PROG} || exit 0
+# shellcheck source=/dev/null
+[ -r "/etc/default/$PROG" ] && . "/etc/default/$PROG"
+export MYTHCONFDIR="/etc/mythtv"
+test -d ${MYTHCONFDIR} || exit 0
+
+if [ -e "/sys/class/net/eth0/operstate" ] && [[ "$(cat /sys/class/net/eth0/operstate)" == "up" ]]; then
+	echo "INFO: ETH0 is up"
+sleep 5
+elif [ -e "/sys/class/net/wlan0/operstate" ] && [[ "$(cat /sys/class/net/wlan0/operstate)" == "up" ]]; then
+    	echo "INFO: WLAN0 is up"
+else 
+    echo "NO NETWORK!"
+    echo "PLUGIN IN ETHERNET or "
+    echo "for WifFi change: ssid/psk"
+    echo "in /etc/wpa_supplicant.conf"
+    echo "then reboot"
+    exit 1
+fi
+
+case "$1" in
+    start) 
+    	echo "Sleep 3 sec, then start mythbackend"
+	sleep 3
+    	echo "Starting mythbackend"
+    	${PROG} --user mythtv --daemon --logpath=/var/log/mythtv --loglevel crit --pidfile /run/mythbackend.pid
+	;;
+
+    stop)
+        echo "Stopping mythbackendend"
+    	killall -q $(basename ${PROG})
+	;;
+    *)
+
+        echo "Usage: $0 {start|stop}"
+        exit 1
+esac
+exit $?
+
