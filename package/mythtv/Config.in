@@ -122,8 +122,6 @@ config BR2_PACKAGE_MYTHTV_INPUT_DVB
 	  Optional mythtv hw input device
 
 config BR2_PACKAGE_LIBHDHOMERUN
-#config BR2_PACKAGE_MYTHTV_INPUT_LIBHDHOMERUN
-	#select BR2_PACKAGE_LIBHDHOMERUN
 	bool "Build libhdhomerun support"
 	help
 	  Optional mythtv hw input device
