@@ -112,7 +112,8 @@ else
 MYTHTV_CONF_OPTS += --disable-dvb
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_INPUT_HDHOMERUN),y)
+ifeq ($(BR2_PACKAGE_LIBHDHOMERUN),y)
+#ifeq ($(BR2_PACKAGE_MYTHTV_INPUT_LIBHDHOMERUN),y)
 MYTHTV_CONF_OPTS += --enable-hdhomerun
 MYTHTV_DEPENDENCIES += libhdhomerun
 else
