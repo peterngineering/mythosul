@@ -348,19 +348,19 @@ config BR2_PACKAGE_MYTHTV_BINDINGS
 
 if BR2_PACKAGE_MYTHTV_BINDINGS
 
-config  BR2_PACKAGE_MYTHTV_BINDINGS_PERL
+config  BR2_PACKAGE_PERL
         bool "Build perl bindings support"
 	 help
 	   Optional mythtv perl bindings
 
-config  BR2_PACKAGE_MYTHTV_BINDINGS_PHP
+config  BR2_PACKAGE_PHP
         bool "Build php bindings support"
 	help
 	  Optional mythtv binding
 
-config  BR2_PACKAGE_MYTHTV_BINDINGS_PYTHON
+config  BR2_PACKAGE_PYTHON
         bool "Build python bindings support"
-	select BR2_PACKAGE_PYTHON3
+	#select BR2_PACKAGE_PYTHON3
         help
           Optional mythtv binding
 endif
