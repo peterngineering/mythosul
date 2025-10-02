@@ -96,12 +96,12 @@ config BR2_PACKAGE_MYTHTV_INPUT_LIRC
 	help
 	  Optional mythtv hw input device
 
-config BR2_PACKAGE_MYTHTV_INPUT_LIBCEC
+config BR2_PACKAGE_LIBCEC
 	bool "Build libCEC support"
 	help
 	  Optional mythtv hw input device
 
-config BR2_PACKAGE_MYTHTV_INPUT_V4L2
+config BR2_PACKAGE_LIBV4L
 	bool "Build v4l2 support"
 	help
 	   Build v4l2 support
@@ -145,7 +145,6 @@ endif
 
 config BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT
 	select BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM
-	select  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL
 	bool "Video Output Support"
 	default y
 
@@ -189,20 +188,8 @@ config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM
 #	 help
 #		Wayland Extras
 
-config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_VIDEO4LINUX
-         bool "Build Video4Linux Codecs support"
-	 depends on BR2_PACKAGE_MYTHTV_INPUT_V4L2
-	 select BR2_PACKAGE_LIBV4L
-	 help
-	   Video4Linux Codec support
-	
-#config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_MMAL
-#	 depends on BR2_PACKAGE_RPI_USERLAND
-#         bool "Build MMAL support"
-#	 help
-#	   	MMAL support
-#comment "selecting MMAL conflicts with libdrm/vc4"
 
+#opengl is a required dep
 config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL
          bool "Build OpenGL support"
 	 default y
@@ -228,9 +215,8 @@ config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_MHEG
 	 help
 	   MHEG support
 
-config  BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_LIBASS
+config  BR2_PACKAGE_LIBASS
          bool "Build libass support"
-	 select BR2_PACKAGE_LIBASS
 	 help
 	   libass subtitle support
 	
@@ -249,7 +235,7 @@ if BR2_PACKAGE_MYTHTV_SOUND_OUTPUT
 #	  help
 #	    Pipewire support
 
-config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_PULSE
+config  BR2_PACKAGE_PULSEAUDIO
          bool "Build PulseAudio support"
 	 help
 	   PulseAudio support
@@ -260,15 +246,12 @@ config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_OSS
 	 help
 	   OSS support
 	
-config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_ALSA
+config  BR2_PACKAGE_ALSA_LIB
          bool "Build ALSA support"
-	 select BR2_PACKAGE_ALSA_LIB
-	 default y
 	 help
 	   ALSA support
 
-config  BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_JACK
-	 select BR2_PACKAGE_JACK1
+config  BR2_PACKAGE_JACK1
          bool "Build JACK support"
 	 help
 	   JACK support
@@ -279,11 +262,10 @@ if BR2_PACKAGE_MYTHTV_MISC
 
 config  BR2_PACKAGE_MYTHTV_MISC_LIXML2
          bool "Build libxml2 support"
-	 select BR2_PACKAGE_LIBXML2
 	 help
 	   libxml2 support
 	
-config  BR2_PACKAGE_MYTHTV_MISC_LIBDNS_SD_BONJOUR
+config  BR2_PACKAGE_AVAHI_LIBDNSSD_COMPATIBILITY
          bool "Build libdns_sd(Bonjour) support"
 	 help
            libdns_sd(Bonjour) support
@@ -293,20 +275,19 @@ config  BR2_PACKAGE_MYTHTV_MISC_LIBCRYPTO
 	 help
 	   libcrypto support
 
-config  BR2_PACKAGE_MYTHTV_MISC_GNUTLS
+config  BR2_PACKAGE_GNUTLS
 	 bool "Build gnutls support"
- 	 select BR2_PACKAGE_GNUTLS
 	 help
 	   gnuutls support
 
-config  BR2_PACKAGE_MYTHTV_MISC_LIBEXIV
+config  BR2_PACKAGE_LIBEXIV
          bool "Build libexiv support"
 	 help
            libexiv support
 
-config  BR2_PACKAGE_MYTHTV_MISC_LIBBLURAY
+#this is required dep
+config  BR2_PACKAGE_LIBBLURAY
          bool "Build bluray support"
-	 select BR2_PACKAGE_LIBBLURAY
 	 default y
 	 help
            bluray support
@@ -330,9 +311,8 @@ config BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS
 
 if BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS
 
-config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_MP3LAME
+config  BR2_PACKAGE_LAME
          bool "Build mp3lame support"
-	 select BR2_PACKAGE_LAME
 	 help
 	   mp3lame support
 
@@ -341,26 +321,23 @@ config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_XVID
 	 help
 	   xvid support
 
-config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_x264
+config  BR2_PACKAGE_X264
          bool "Build x264 support"
-	 select B2_PACKAGE_x264
 	 help
 	   x264 support
 
-config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_x265
+config  BR2_PACKAGE_x265
          bool "Build x265 (HEVC) support"
-	 select BR2_PACKAGE_x265
 	 help
 	   "x265 (HEVC) support"
 
-config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBAOM
+config  BR2_PACKAGE_LIBAOM
          bool "Build libaom (AV1) support"
 	 help
 	   "aom (AV1) support"
 
-config  BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBDAV1D
+config  BR2_PACKAGE_DAV1D
          bool "Build libdav1d (AV1) support"
-	 select BR2_PACKAGE_DAV1D
 	 help
 	   "libdav1d (AV1) support"
 endif

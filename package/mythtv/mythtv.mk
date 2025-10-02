@@ -80,19 +80,18 @@ else
 MYTHTV_CONF_OPTS += --disable-lirc
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_INPUT_LIBCEC),y)
+ifeq ($(BR2_PACKAGE_LIBCEC),y)
 MYTHTV_CONF_OPTS += --enable-libcec
 else
 MYTHTV_CONF_OPTS += --disable-libcec
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_INPUT_V4L2),y)
+ifeq ($(BR2_PACKAGE_LIBV4L),y)
 MYTHTV_CONF_OPTS += --enable-v4l2
 MYTHTV_DEPENDENCIES += libv4l
+else
+MYTHTV_CONF_OPTS += --disable-v4l2
 endif
-#else
-#MYTHTV_CONF_OPTS += --disable-v4l2
-#endif
 
 ifeq ($(BR2_PACKAGE_MYTHTV_INPUT_SATIP),y)
 MYTHTV_CONF_OPTS += --enable-satip
@@ -171,9 +170,9 @@ else
 MYTHTV_CONF_OPTS += --disable-bindings_python
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_PULSE),y)
+ifeq ($(BR2_PACKAGE_PULSEAUDIO),y)
 MYTHTV_CONF_OPTS += --enable-audio-pulse
-MYTHTV_DEPENDENCIES += libpulse
+MYTHTV_DEPENDENCIES += pulseaudio
 else
 MYTHTV_CONF_OPTS += --disable-audio-pulse
 endif
@@ -185,25 +184,27 @@ MYTHTV_CONF_OPTS += --enable-audio-oss
 #MYTHTV_CONF_OPTS += --disable-audio-oss
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_ALSA),y)
+ifeq ($(BR2_PACKAGE_ALSA_LIB),y)
 MYTHTV_CONF_OPTS += --enable-alsa
 MYTHTV_DEPENDENCIES += alsa-lib
 else
 MYTHTV_CONF_OPTS += --disable-alsa
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_SOUND_OUTPUT_JACK),y)
+ifeq ($(BR2_PACKAGE_JACK1),y)
 MYTHTV_CONF_OPTS += --enable-audio-jack
-#MYTHTV_DEPENDENCIES += jack1
+MYTHTV_DEPENDENCIES += jack1
 else
 MYTHTV_CONF_OPTS += --disable-audio-jack
 endif
 
-#ifeq ($(BR2_PACKAGE_GNUTLS),y)
-#MYTHTV_CONF_OPTS += --enable-gnutls --disable-openssl
-#MYTHTV_DEPENDENCIES += gnutls
-#else
-#MYTHTV_CONF_OPTS += --disable-gnutls
+ifeq ($(BR2_PACKAGE_GNUTLS),y)
+MYTHTV_CONF_OPTS += --enable-gnutls 
+#--disable-openssl
+MYTHTV_DEPENDENCIES += gnutls
+else
+MYTHTV_CONF_OPTS += --disable-gnutls
+endif
 
 #ifeq ($(BR2_PACKAGE_OPENSSL),y)
 ## openssl isn't license compatible with GPL
@@ -254,22 +255,13 @@ else
 MYTHTV_CONF_OPTS += --disable-drm
 endif
 
-#rpi-userland is deprecated in favor of libdrm/vc4/v3d
-#ifeq ($(BR2_PACKAGE_RPI_USERLAND),y)
-#MYTHTV_CONF_OPTS += --enable-mmal \
-#	--extra-cflags=-I$(STAGING_DIR)/usr/include/IL
-#MYTHTV_DEPENDENCIES += rpi-userland
-#else
-#MYTHTV_CONF_OPTS += --disable-mmal
-#endif
-
 #opengl is mandatory
-#ifeq ($(BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL),y)
-#MYTHTV_CONF_OPTS += --enable-opengl
-#MYTHTV_DEPENDENCIES += 
-#else
-#MYTHTV_CONF_OPTS += --disable-opengl
-#endif
+ifeq ($(BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_OPENGL),y)
+MYTHTV_CONF_OPTS += --enable-opengl
+MYTHTV_DEPENDENCIES += 
+else
+MYTHTV_CONF_OPTS += --disable-opengl
+endif
 
 ifeq ($(BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_DRM)$(BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_EGL),yy)
 MYTHTV_CONF_OPTS += --enable-egl
@@ -290,7 +282,7 @@ else
 MYTHTV_CONF_OPTS += --disable-mheg
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_VIDEO_OUTPUT_LIBASS),y)
+ifeq ($(BR2_PACKAGE_LIBASS),y)
 MYTHTV_CONF_OPTS += --enable-libass
 MYTHTV_DEPENDENCIES += libass
 else
@@ -299,14 +291,14 @@ endif
 
 #Misc options
 
-ifeq ($(BR2_PACKAGE_MYTHTV_MISC_LIBXML2),y)
+ifeq ($(BR2_PACKAGE_LIBXML2),y)
 MYTHTV_CONF_OPTS += --enable-libxml2
 MYTHTV_DEPENDENCIES += libxml2
 else
 MYTHTV_CONF_OPTS += --disable-libxml2
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_MISC_LIBDNS_SD_BONJOUR),y)
+ifeq ($(BR2_PACKAGE_AVAHI_LIBDNSSD_COMPATIBILITY),y)
 MYTHTV_CONF_OPTS += --enable-libdns-sd
 #MYTHTV_DEPENDENCIES += avahi
 else
@@ -340,7 +332,7 @@ endif
 #endif
 
 #ext codec options
-ifeq ($(BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_MP3LAME),y)
+ifeq ($(BR2_PACKAGE_LAME),y)
 MYTHTV_CONF_OPTS += --enable-libmp3lame
 MYTHTV_DEPENDENCIES += lame
 else
@@ -354,28 +346,28 @@ else
 MYTHTV_CONF_OPTS += --disable-libxvid
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_X264)$(BR2_PACKAGE_MYTHTV_GPL),yy)
+ifeq ($(BR2_PACKAGE_X264)$(BR2_PACKAGE_MYTHTV_GPL),yy)
 MYTHTV_CONF_OPTS += --enable-libx264
 MYTHTV_DEPENDENCIES += x264
 else
 MYTHTV_CONF_OPTS += --disable-libx264
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_X265)$(BR2_PACKAGE_MYTHTV_GPL),yy)
+ifeq ($(BR2_PACKAGE_X265)$(BR2_PACKAGE_MYTHTV_GPL),yy)
 MYTHTV_CONF_OPTS += --enable-libx265
 MYTHTV_DEPENDENCIES += x265
 else
 MYTHTV_CONF_OPTS += --disable-libx265
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBAOM),y)
+ifeq ($(BR2_PACKAGE_LIBAOM),y)
 MYTHTV_CONF_OPTS += --enable-libaom
 #MYTHTV_DEPENDENCIES += libaom
 else
 MYTHTV_CONF_OPTS += --disable-libaom
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_EXTERNAL_CODEC_OPTIONS_LIBDAV1D),y)
+ifeq ($(BR2_PACKAGE_LIBDAV1D),y)
 MYTHTV_CONF_OPTS += --enable-libdav1d
 MYTHTV_DEPENDENCIES += dav1d
 else
@@ -413,9 +405,9 @@ endif
 #MYTHTV_CONF_OPTS += --disable-armv7
 #endif
 
-ifeq ($(BR2_arm1176jzf_s),y)
-MYTHTV_CONF_OPTS += --cpu=armv6 
-endif
+#ifeq ($(BR2_arm1176jzf_s),y)
+#MYTHTV_CONF_OPTS += --cpu=armv6 
+#endif
 
 ifeq ($(BR2_ARM_CPU_HAS_VFPV3),y)
 MYTHTV_CONF_OPTS += --enable-vfpv3
@@ -548,5 +540,6 @@ define MYTHTV_INSTALL_PERL_MYTHTV_BINDINGS
 endef
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_PERL_MYTHTV_BINDINGS
 endif
+
 
 $(eval $(autotools-package))
