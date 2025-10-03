@@ -395,6 +395,10 @@ ifeq ($(BR2_cortex_a53),y)
 MYTHTV_CONF_OPTS += --cpu=cortex-a53
 endif
 
+ifeq ($(BR2_cortex_a17),y)
+MYTHTV_CONF_OPTS += --cpu=cortex-a17
+endif
+
 ifeq ($(BR2_cortex_a7),y)
 MYTHTV_CONF_OPTS += --cpu=cortex-a7
 endif
