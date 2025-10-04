@@ -19,14 +19,13 @@ config BR2_PACKAGE_HOST_PERL_DATE_MANIP
 
 config BR2_PACKAGE_HOST_PERL_DBD_MYSQL
 	bool "perl-dbd-mysql"
-	select BR2_PACKAGE_HOST_PERL_DBI
 	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
-	help
 	help
 	  dbd mysql module for host Perl.
 
 config BR2_PACKAGE_HOST_PERL_DBI
 	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	default y
 	bool "perl-dbi"
 	help
 	  dbi module for host Perl

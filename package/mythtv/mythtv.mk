@@ -136,20 +136,23 @@ else
 MYTHTV_CONF_OPTS += --disable-asi
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_BINDINGS_PERL),y)
+		       #perl-module-build 
+		      # perl-clone 
+ifeq ($(BR2_PACKAGE_PERL),y)
 MYTHTV_CONF_OPTS += --enable-bindings_perl
-#MYTHTV_DEPENDENCIES += perl \
+MYTHTV_DEPENDENCIES += perl \
 		       perl-date-manip \
+		       host-perl-dbi \
 		       perl-dbi \
+		       host-perl-dbd-mysql \
 		       perl-dbd-mysql \
-		       perl-clone \
 		       perl-http-date \
 		       perl-http-message \
 		       perl-io-socket-inet6 \
 		       perl-libwww-perl \
-		       perl-module-build \
+		       host-perl-module-build \
 		       perl-net-upnp \
-		       perl-socket6 \
+		       host-perl-socket6 \
 		       perl-try-tiny \
 		       perl-uri \
 		       perl-xml-simple 
