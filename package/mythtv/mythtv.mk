@@ -515,9 +515,7 @@ define MYTHTV_INSTALL_JSON
 endef
 
 define MYTHTV_INSTALL_UDEV_RULES
-	$(INSTALL) -D -m 644 package/mythtv/UDEV/99-mythbackend-udev.rules \
-		$(TARGET_DIR)/etc/udev/rules.d
-	$(INSTALL) -D -m 644 package/mythtv/UDEV/10-vc-udev.rules \
+	$(INSTALL) -D -m 644 package/mythtv/UDEV/COMMOND/99-mythbackend-udev.rules \
 		$(TARGET_DIR)/etc/udev/rules.d
 endef
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_MISC_BIN
