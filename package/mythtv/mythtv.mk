@@ -3,14 +3,14 @@
 # mythtv
 #
 ###############################################################################
-
-# v35-fixes from upstream
-# commit/931474b3a0c98aa80ceb7903359af2024726156e
+#
+# snapshot v35-fixes from upstream on 20251005
 #
 ###############################################################################
-MYTHTV_VERSION = 931474b3a0c98aa80ceb7903359af2024726156e
+
+MYTHTV_VERSION = 7f79cf78b319c82ed770d224dfd8beb04d553639
 MYTHTV_SOURCE = mythtv-$(MYTHTV_VERSION).tar.gz
-MYTHTV_SITE = $(call github,mythtv,mythtv,$(MYTHTV_VERSION))
+MYTHTV_SITE = $(call github,peterngineering,mythtv,$(MYTHTV_VERSION))
 
 MYTHTV_SUBDIR = mythtv
 MYTHTV_INSTALL_TARGET = YES
