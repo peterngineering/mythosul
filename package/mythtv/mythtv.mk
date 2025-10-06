@@ -301,9 +301,9 @@ else
 MYTHTV_CONF_OPTS += --disable-libxml2
 endif
 
-ifeq ($(BR2_PACKAGE_AVAHI_LIBDNSSD_COMPATIBILITY),y)
+ifeq ($(BR2_PACKAGE_AVAHI),y)
 MYTHTV_CONF_OPTS += --enable-libdns-sd
-#MYTHTV_DEPENDENCIES += avahi
+MYTHTV_DEPENDENCIES += avahi
 else
 MYTHTV_CONF_OPTS += --disable-libdns-sd
 endif

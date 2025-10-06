@@ -257,6 +257,9 @@ config  BR2_PACKAGE_JACK1
 	   JACK support
 endif
 
+config BR2_PACKAGE_MYTHTV_MISC
+	bool "Misc Options"
+	default y
 
 if BR2_PACKAGE_MYTHTV_MISC
 
@@ -265,8 +268,12 @@ config  BR2_PACKAGE_MYTHTV_MISC_LIXML2
 	 help
 	   libxml2 support
 	
-config  BR2_PACKAGE_AVAHI_LIBDNSSD_COMPATIBILITY
+config  BR2_PACKAGE_AVAHI
          bool "Build libdns_sd(Bonjour) support"
+	 select BR2_PACKAGE_AVAHI_LIBDNSSD_COMPATIBILITY
+	 select BR2_PACKAGE_AVAHI_AUTOIPD
+	 select BR2_PACKAGE_AVAHI_DAEMON
+	 select BR2_PACKAGE_AVAHI_LIBAVAHI_CLIENT
 	 help
            libdns_sd(Bonjour) support
 
