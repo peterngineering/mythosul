@@ -11,7 +11,7 @@ cat $BINARIES_DIR/u-boot-tpl.img $BINARIES_DIR/u-boot-spl-dtb.bin > $BINARIES_DI
 
 install -m 0644 -D $BOARD_DIR/extlinux.conf $TARGET_DIR/boot/extlinux/extlinux.conf
 
-install -m 0755 -D output/build/linux-6.16.10/arch/arm/boot/dts/rockchip/rk3288-tinker.dtb $TARGET_DIR/boot/
+install -m 0755 -D output/build/linux-6.12.51/arch/arm/boot/dts/rockchip/rk3288-tinker.dtb $TARGET_DIR/boot/
 
 
 #make StorageGroups dirs for mythtv
