@@ -19,12 +19,16 @@ config BR2_PACKAGE_HOST_PERL_DATE_MANIP
 
 config BR2_PACKAGE_HOST_PERL_DBD_MYSQL
 	bool "perl-dbd-mysql"
+	depends on BR2_PACKAGE_HOST_PERL_DBI
+	depends on BR2_PACKAGE_HOST_MARIADB
+#	select BR2_PACKAGE_HOST_PERL_DBI
 	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
 	help
 	  dbd mysql module for host Perl.
 
 config BR2_PACKAGE_HOST_PERL_DBI
 	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
+	select BR2_PACKAGE_HOST_PERL_DBD_MYSQL
 	default y
 	bool "perl-dbi"
 	help
@@ -43,20 +47,16 @@ config BR2_PACKAGE_HOST_PERL_HTTP_MESSAGE
 
 config BR2_PACKAGE_HOST_PERL_MODULE_BUILD
 	bool "perl-module-build"
-	select BR2_PACKAGE_HOST_PERL_CLONE
 	help
 	  build module for host Perl.
 
 config BR2_PACKAGE_HOST_PERL_IO_INTERFACE
 	bool "perl-io-interface"
-	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
 	help
 	  IO interfaace module for host Perl.
 
 config BR2_PACKAGE_HOST_PERL_IO_SOCKET_INET6
 	bool "perl-io-socket-inet6"
-	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
-	select BR2_PACKAGE_HOST_PERL_SOCKET6 
 	help
 	  "(deprecated) perl-io-socket-inet6 module for host Perl.
 
@@ -68,7 +68,6 @@ config BR2_PACKAGE_HOST_PERL_LIBWWW_PERL
 
 config BR2_PACKAGE_HOST_PERL_MODULE_BUILD
 	bool "perl-module-build"
-	select BR2_PACKAGE_HOST_PERL_CLONE
 	help
 	  build module for host Perl.
 
@@ -80,8 +79,6 @@ config BR2_PACKAGE_HOST_PERL_NET_UPNP
 
 config BR2_PACKAGE_HOST_PERL_SOCKET6
 	bool "perl-socket6"
-	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
-	#select BR2_PACKAGE_HOST_PERL_IO_INTERFACE
 	help
 	  socket6 module for host Perl.
 

@@ -1,6 +1,14 @@
 [Unit]
 Description=MythTV frontend service
-After=network-online.target time-sync.target
+# Summary of autorestaring frontend.
+# The default is that it will try 1 time every 15 seconds up to 5 minutes, then giveup.
+# 
+# When to timeout(giveup) restart attempts, comment out for infinite retries.
+StartLimitIntervalSec=300
+# How many times it should attempt restarting service within a 'RestartSec=*" window
+StartLimitBurst=3
+
+After=NetworkManager-wait-online.service mysqld.service mythbackend.service network-online.target chrony.service
 
 [Service]
 Type=simple
@@ -8,21 +16,29 @@ Type=simple
 # Default setting assumes a system wide install. Otherwise it should be set to 
 # the folder containing the .mythtv subfolder containing the config.xml file
 Environment=MYTHCONFDIR=/home/mythtv/.mythtv
-
+# make sure kbd works in terminal
+# this may change in future, work around any potential libinput issues for now
+Environment=QT_QPA_EGLFS_NO_LIBINPUT=1
+Environment=QT_QPA_ENABLE_TERMINAL_KEYBOARD=1
 # systemd changes execution from the calling user (possibly root) to this user
 # if you have permissions problems or obscure errors try logging in as mythtv
 User=mythtv
 
+#set cpu scaling gov to performance mode
 ExecStartPre=/home/mythtv/bin/performance.sh
-ExecStart=/usr/bin/mythfrontend --logpath /tmp
+
+#default start with eglfs, change to xcb for x11/wayland use
+ExecStart=/usr/bin/mythfrontend -platform eglfs --logpath /tmp
 
 # Whether systemd will continue over-watch and restart on any halt
+# Note "always' will even restart if you exit or the process exits clean
 #Restart=always
-
-# try uncommenting the following lines:
-Restart=on-error
-StartLimitBurst=1
-StartLimitInterval=15
+# To only restart after failures
+Restart=on-failure
+# How often it should attempt restart
+# You need long enough if at the console to exit and stop mythfrontend
+# Yet be reasonably short duration for waiting on recover after failures
+RestartSec=15
 
 [Install]
 WantedBy=multi-user.target

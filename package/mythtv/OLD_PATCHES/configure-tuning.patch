@@ -30,15 +30,3 @@ index 12a9579..97209a8 100755
  
  if test "$ID" = "raspbian"; then
      case $cpu in
-@@ -6423,7 +6426,10 @@ append ffopts \
- --extra-cflags=\'"$ffmpeg_extra_cflags"\' \
- --extra-ldflags=\'"$ffmpeg_extra_ldflags"\' \
- --extra-libs=\'"$ffmpeg_extra_ldflags"\' \
----disable-stripping \
-+--enable-stripping \
-+--enable-small \
-+--disable-runtime-cpudetect \
-+--disable-hardcoded-tables \
- --disable-manpages  \
- --disable-podpages  \
- --disable-doc \

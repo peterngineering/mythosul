@@ -25,9 +25,9 @@ endif
 
 
 #--enable-lto does NOT work when tried here, yet will work on a native build
+#--enable-small #myth not be worth using
 MYTHTV_CONF_OPTS = \
 	--prefix=/usr \
-	--enable-small \
 	--disable-debug \
 	--compile-type=release
 
@@ -55,7 +55,7 @@ endif
 
 ifeq ($(BR2_PACKAGE_MYTHTV_FFMPEG_FFPLAY),y)
 MYTHTV_DEPENDENCIES += sdl2
-MYTHTV_CONF_OPTS += --enable-ffplay
+MYTHTV_CONF_OPTS += --enable-sdl --enable-ffplay
 MYTHTV_CONF_ENV += SDL_CONFIG=$(STAGING_DIR)/usr/bin/sdl2-config
 else
 MYTHTV_CONF_OPTS += --disable-ffplay
@@ -138,14 +138,15 @@ endif
 
 		       #perl-module-build 
 		      # perl-clone 
+		       
+		       #host-perl-dbd-mysql \#
 ifeq ($(BR2_PACKAGE_PERL),y)
 MYTHTV_CONF_OPTS += --enable-bindings_perl
-MYTHTV_DEPENDENCIES += perl \
+MYTHTV_DEPENDENCIES += perl 
+#\
 		       perl-date-manip \
 		       host-perl-dbi \
 		       perl-dbi \
-		       host-perl-dbd-mysql \
-		       perl-dbd-mysql \
 		       perl-http-date \
 		       perl-http-message \
 		       perl-io-socket-inet6 \
@@ -155,7 +156,10 @@ MYTHTV_DEPENDENCIES += perl \
 		       host-perl-socket6 \
 		       perl-try-tiny \
 		       perl-uri \
-		       perl-xml-simple 
+		       perl-xml-simple \
+#
+#perl-dbd-mysql #
+
 else
 MYTHTV_CONF_OPTS += --disable-bindings_perl
 endif
@@ -412,9 +416,9 @@ endif
 #MYTHTV_CONF_OPTS += --disable-armv7
 #endif
 
-#ifeq ($(BR2_arm1176jzf_s),y)
-#MYTHTV_CONF_OPTS += --cpu=armv6 
-#endif
+ifeq ($(BR2_arm1176jzf_s),y)
+MYTHTV_CONF_OPTS += --cpu=arm1176jzf-s
+endif
 
 ifeq ($(BR2_ARM_CPU_HAS_VFPV3),y)
 MYTHTV_CONF_OPTS += --enable-vfpv3
@@ -464,23 +468,17 @@ endef
 
 
 ifeq ($(BR2_PACKAGE_MYTHTV),y)
-define MYTHTV_INSTALL_INIT_SYSV
-	$(INSTALL) -D -m 755 package/mythtv/INIT_D/S99mythfrontend \
-		$(TARGET_DIR)/etc/init.d
-	$(INSTALL) -D -m 755 package/mythtv/INIT_D/S98mythbackend \
-		$(TARGET_DIR)/etc/init.d
-endef
 
-#define MYTHTV_INSTALL_INIT_SYSTEMD
-#	$(INSTALL) -D -m 755 package/mythtv/SYSTEMD/mythfrontend.service \
-#	       	$(TARGET_DIR)/usr/lib/systemd/system
-#	$(INSTALL) -D -m 755 package/mythtv/SYSTEMD/mythbackend.service \
-#	       	$(TARGET_DIR)/usr/lib/systemd/system
-#endef
+define MYTHTV_INSTALL_INIT_SYSTEMD
+	$(INSTALL) -D -m 644 package/mythtv/SYSTEMD/mythfrontend.service \
+	       	$(TARGET_DIR)/usr/lib/systemd/system
+	$(INSTALL) -D -m 644 package/mythtv/SYSTEMD/mythbackend.service \
+	       	$(TARGET_DIR)/usr/lib/systemd/system
+endef
 
 define MYTHTV_INSTALL_MISC_BIN
 	mkdir -p $(TARGET_DIR)/root/bin
-	$(INSTALL) -D -m 755 package/mythtv/BIN/*.sh \
+	$(INSTALL) -D -m 755 package/mythtv/BIN/* \
 		$(TARGET_DIR)/root/bin
 endef
 
@@ -508,12 +506,6 @@ define MYTHTV_INSTALL_CPUFREQ_TOGGLES
 		$(TARGET_DIR)/home/mythtv/bin
 endef
 
-define MYTHTV_INSTALL_JSON
-	mkdir -p $(TARGET_DIR)/home/mythtv/JSON
-	$(INSTALL) -D -m 644 package/mythtv/JSON/mythfrontend*.json \
-		$(TARGET_DIR)/home/mythtv/JSON
-endef
-
 define MYTHTV_INSTALL_UDEV_RULES
 	$(INSTALL) -D -m 644 package/mythtv/UDEV/COMMON/99-mythbackend-udev.rules \
 		$(TARGET_DIR)/etc/udev/rules.d
@@ -523,7 +515,6 @@ MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_CONTRIB
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_CONFIGFE
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_CONFIGSVR
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_CPUFREQ_TOGGLES
-MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_JSON
 MYTHTV_POST_INSTALL_TARGET_HOOKS += MYTHTV_INSTALL_UDEV_RULES
 endif
 

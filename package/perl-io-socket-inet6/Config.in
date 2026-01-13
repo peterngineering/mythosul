@@ -1,6 +1,8 @@
 config BR2_PACKAGE_PERL_IO_SOCKET_INET6
 	bool "perl-io-socket-inet6"
 	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_HOST_PERL_SOCKET6
+	select BR2_PACKAGE_HOST_PERL_MODULE_BUILD
 	select BR2_PACKAGE_PERL_IO_INTERFACE # runtime
 	help
 	   "Object interface for AF_INET/AF_INET6 domain sockets"	

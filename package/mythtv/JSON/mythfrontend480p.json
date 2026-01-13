@@ -1,6 +1,0 @@
-{
-    "device": "/dev/dri/by-path/platform-soc:gpu-card",
-    "outputs": [
-        { "name": "HDMI1", "mode": "720x480@60" }
-    ]
-}

@@ -24,9 +24,10 @@ User=mythtv
 # Use sysloging rather than separate logging:
 #ExecStart=/usr/bin/mythbackend --syslog local7
 # If Type=forking is set you must specify the --daemon and --pidfile options:
-#ExecStart=/usr/bin/mythbackend --daemon --logpath /var/log/mythtv --loglevel crit --pidfile /run/mythbackend.pid
+#ExecStart=/usr/bin/mythbackend --daemon --logpath /tmp --loglevel crit --pidfile /run/mythbackend.pid
 # Default setting for Type=simple.
-ExecStart=/usr/bin/mythbackend --logpath /var/log/mythtv
+ExecStartPre=/bin/sh -c 'chown -Rcv mythtv:mythtv /etc/mythtv /var/lib/mythtv'
+ExecStart=/usr/bin/mythbackend --logpath /tmp
 
 # Whether systemd will continue over-watch and restart on any halt
 #Restart=always
@@ -39,4 +40,5 @@ StartLimitBurst=3
 StartLimitInterval=15
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=
+#multi-user.target
