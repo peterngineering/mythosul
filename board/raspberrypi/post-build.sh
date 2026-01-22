@@ -22,19 +22,21 @@ fi
 #disable default autostart of some services
 #
 if [ -e ${TARGET_DIR}/usr/lib/systemd/system/mysqld.service ]; then
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/mysqld.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/mysqld.service
 fi
 
 if [ -e ${TARGET_DIR}/usr/lib/systemd/system/lighttpd.service ]; then
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/lighttpd.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/lighttpd.service
 fi
 
 if [ -e ${TARGET_DIR}/usr/lib/systemd/system/samba.service ]; then
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/samba.service
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/samba-bgqd.service
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/smb.service
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/nmb.service
-    sed -i 's/WantedBy=multi-user.target/WantedBy=/' ${TARGET_DIR}/usr/lib/systemd/system/winbind.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/samba.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/samba-bgqd.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/smb.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/nmb.service
+    sed -i 's/WantedBy=multi-user.target/#WantedBy=multi-user.target/' ${TARGET_DIR}/usr/lib/systemd/system/winbind.service
 fi
 
-
+if [ -e ${TARGET_DIR}/usr/lib/systemd/system/xfs_scrub_all.timer ]; then
+    sed -i 's/WantedBy=timers.target/#WantedBy=timers.target/' ${TARGET_DIR}/usr/lib/systemd/system/xfs_scrub_all.timer
+fi

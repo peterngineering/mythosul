@@ -12,4 +12,3 @@ PERL_LIBWWW_PERL_LICENSE_FILES = LICENSE
 PERL_LIBWWW_PERL_DISTNAME = libwww-perl
 
 $(eval $(perl-package))
-$(eval $(host-perl-package))

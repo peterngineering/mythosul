@@ -363,7 +363,8 @@ config  BR2_PACKAGE_PERL
 	#depends on BR2_PACKAGE_HOST_PERL_DBI
 	#select BR2_PACKAGE_HOST_PERL_DBI
 	#depends on BR2_PACKAGE_PERL_DBI
-	#select BR2_PACKAGE_PERL_DBI
+	select BR2_PACKAGE_HOST_PERL_DBI
+	select BR2_PACKAGE_PERL_DBI
 	#select BR2_PACKAGE_HOST_PERL_DBD_MYSQL
 	#select BR2_PACKAGE_PERL_DBD_MYSQL
 	#select BR2_PACKAGE_PERL_HTTP_DATE
@@ -387,9 +388,13 @@ config  BR2_PACKAGE_PHP
 	help
 	  Optional mythtv binding
 
-config  BR2_PACKAGE_PYTHON
+config  BR2_PACKAGE_PYTHON3
         bool "Build python bindings support"
-	#select BR2_PACKAGE_PYTHON3
+	default y
+	select BR2_PACKAGE_HOST_PYTHON_LXML
+	select BR2_PACKAGE_PYTHON_LXML
+	select BR2_PACKAGE_PYTHON_PIP
+	select BR2_PACKAGE_PYTHON_REQUESTS
         help
           Optional mythtv binding
 endif

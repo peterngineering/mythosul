@@ -1,10 +1,9 @@
-Welcome to my(our) Mythosul project,
+Welcome to the Mythosul project,
 
 
 Yet Another MythTV OS 
 -embedded release
--based on/built with buildroot 2025 
-tracking LTS releases
+-based on/built with buildroot, tracking LTS releases
 -Currently running 
 MythTV 35/fixes
 
@@ -12,13 +11,6 @@ Details in the Wiki Section.
 
 ***
 ***
-
-
-
-
-
-
-
 Buildroot is a simple, efficient and easy-to-use tool to generate embedded
 Linux systems through cross-compilation.
 

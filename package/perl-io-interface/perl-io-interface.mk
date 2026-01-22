@@ -13,4 +13,3 @@ PERL_IO_INTERFACE_LICENSE_FILES = LICENSE
 PERL_IO_INTERFACE_DISTNAME = IO-Interface
 
 $(eval $(perl-package))
-#$(eval $(host-perl-package))

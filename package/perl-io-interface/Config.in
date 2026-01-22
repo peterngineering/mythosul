@@ -1,7 +1,6 @@
 config BR2_PACKAGE_PERL_IO_INTERFACE
 	bool "perl-io-interface"
 	depends on !BR2_STATIC_LIBS
-	select BR2_PACKAGE_PERL_MODULE_BUILD
 	help
 	  Access and modify network interface card configuration.
 

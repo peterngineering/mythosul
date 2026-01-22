@@ -12,4 +12,3 @@ PERL_DATE_MANIP_LICENSE_FILES = LICENSE
 PERL_DATE_MANIP_DISTNAME = Date-Manip
 
 $(eval $(perl-package))
-$(eval $(host-perl-package))

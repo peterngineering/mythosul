@@ -12,4 +12,3 @@ PERL_CLONE_LICENSE_FILES = README.md
 PERL_CLONE_DISTNAME = Clone
 
 $(eval $(perl-package))
-$(eval $(host-perl-package))

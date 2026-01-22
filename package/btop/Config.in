@@ -1,0 +1,7 @@
+config BR2_PACKAGE_BTOP
+	bool "btop"
+	depends on BR2_arm || BR2_aarch64 || BR2_x86_64
+	help
+	  btop is an interactive text-mode process viewer for Linux.
+
+	  https://github.com/aristocratos/btop

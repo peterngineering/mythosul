@@ -4,7 +4,7 @@ Description=MythTV frontend service
 # The default is that it will try 1 time every 15 seconds up to 5 minutes, then giveup.
 # 
 # When to timeout(giveup) restart attempts, comment out for infinite retries.
-StartLimitIntervalSec=300
+# StartLimitIntervalSec=300
 # How many times it should attempt restarting service within a 'RestartSec=*" window
 StartLimitBurst=3
 
@@ -23,6 +23,8 @@ Environment=QT_QPA_ENABLE_TERMINAL_KEYBOARD=1
 # systemd changes execution from the calling user (possibly root) to this user
 # if you have permissions problems or obscure errors try logging in as mythtv
 User=mythtv
+
+ExecStartPre=/bin/sh -c 'if  [ "$(cat /sys/class/net/eth0/operstate)" == "up" ] || [ "$(cat /sys/class/net/wlan0/operstate)" == "up" ];then echo "network up";else exit 1;fi'
 
 #set cpu scaling gov to performance mode
 ExecStartPre=/home/mythtv/bin/performance.sh

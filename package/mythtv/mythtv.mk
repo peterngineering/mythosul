@@ -142,7 +142,7 @@ endif
 		       #host-perl-dbd-mysql \#
 ifeq ($(BR2_PACKAGE_PERL),y)
 MYTHTV_CONF_OPTS += --enable-bindings_perl
-MYTHTV_DEPENDENCIES += perl 
+MYTHTV_DEPENDENCIES += perl perl-dbi
 #\
 		       perl-date-manip \
 		       host-perl-dbi \
@@ -164,13 +164,13 @@ else
 MYTHTV_CONF_OPTS += --disable-bindings_perl
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_BINDINGS_PHP),y)
+ifeq ($(BR2_PACKAGE_PHP),y)
 MYTHTV_CONF_OPTS += --enable-bindings_php
 else
 MYTHTV_CONF_OPTS += --disable-bindings_php
 endif
 
-ifeq ($(BR2_PACKAGE_MYTHTV_BINDINGS_PYTHON),y)
+ifeq ($(BR2_PACKAGE_PYTHON3),y)
 MYTHTV_CONF_OPTS += --enable-bindings_python
 #MYTHTV_DEPENDENCIES += python
 else
@@ -391,23 +391,23 @@ MYTHTV_CONF_OPTS += --cpu=aarch64
 endif
 
 ifeq ($(BR2_cortex_a73),y)
-MYTHTV_CONF_OPTS += --cpu=cortex-a73
+MYTHTV_CONF_OPTS += --cpu=cortex-a73 
 endif
 
 ifeq ($(BR2_cortex_a72),y)
-MYTHTV_CONF_OPTS += --cpu=cortex-a72
+MYTHTV_CONF_OPTS += --cpu=cortex-a72 
 endif
 
 ifeq ($(BR2_cortex_a53),y)
-MYTHTV_CONF_OPTS += --cpu=cortex-a53
+MYTHTV_CONF_OPTS += --cpu=cortex-a53 
 endif
 
 ifeq ($(BR2_cortex_a17),y)
-MYTHTV_CONF_OPTS += --cpu=cortex-a17
+MYTHTV_CONF_OPTS += --cpu=cortex-a17 
 endif
 
 ifeq ($(BR2_cortex_a7),y)
-MYTHTV_CONF_OPTS += --cpu=cortex-a7
+MYTHTV_CONF_OPTS += --cpu=cortex-a7 
 endif
 
 #ifeq ($(BR2_ARM_CPU_ARMV7A),y)
@@ -417,13 +417,8 @@ endif
 #endif
 
 ifeq ($(BR2_arm1176jzf_s),y)
-MYTHTV_CONF_OPTS += --cpu=arm1176jzf-s
-endif
-
-ifeq ($(BR2_ARM_CPU_HAS_VFPV3),y)
-MYTHTV_CONF_OPTS += --enable-vfpv3
-else
-MYTHTV_CONF_OPTS += --disable-vfpv3
+MYTHTV_CONF_OPTS += --cpu=arm1176jzf-s 
+#--enable-vfpv2
 endif
 
 ifeq ($(BR2_ARM_CPU_HAS_VFPV2),y)
@@ -440,9 +435,9 @@ else
 MYTHTV_CONF_OPTS += --disable-neon
 endif
 
-#ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
-#MYTHTV_CFLAGS += -marm
-#endif
+ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
+MYTHTV_CFLAGS += -marm
+endif
 
 
 MYTHTV_CONF_OPTS += $(call qstrip,$(BR2_PACKAGE_MYTHTV_EXTRACONF))
@@ -521,8 +516,9 @@ endif
 
 #temp hack 
 #install perl bindings to right target/clean up(HARDCODED HOMDIR) wrong target
-#todo try using other vars ehre to identify /home/br like eg. $(HOME)
-ifeq ($(BR2_PACKAGE_MYTHTV_BINDINGS_PERL),y)
+#todo try using other vars  to identify /home/br like eg. $(HOME)
+#ifeq ($(BR2_PACKAGE_MYTHTV_BINDINGS_PERL),y)
+ifeq ($(BR2_PACKAGE_PERL),y)
 define MYTHTV_INSTALL_PERL_MYTHTV_BINDINGS
 	mkdir -p $(TARGET_DIR)/usr/lib/perl5/site_perl/5.40.2/IO/Socket/INET
 	$(INSTALL) -D -m 644 $(MYTHTV_SRCDIR)/bindings/perl/IO/Socket/INET/MythTV.pm \
