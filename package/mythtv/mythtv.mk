@@ -383,7 +383,8 @@ endif
 
 #cpu
 ifeq ($(BR2_x86_64),y)
-MYTHTV_CONF_OPTS += --cpu=x86_64
+#MYTHTV_CONF_OPTS += =x86_64
+#MYTHTV_CONF_OPTS += --cpu=x86_64
 endif
 
 ifeq ($(BR2_aarch64),y)

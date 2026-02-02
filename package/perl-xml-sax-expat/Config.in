@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_XML_SAX_EXPAT
+	bool "perl-xml-sax-expat"
+	help
+	  Implementation of a SAX2 driver sitting on top of Expat. 
+
+	  https://metacpan.org/release/XML-SAX-Expat

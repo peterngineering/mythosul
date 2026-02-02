@@ -6,7 +6,7 @@ Description=MythTV frontend service
 # When to timeout(giveup) restart attempts, comment out for infinite retries.
 # StartLimitIntervalSec=300
 # How many times it should attempt restarting service within a 'RestartSec=*" window
-StartLimitBurst=3
+StartLimitBurst=1
 
 After=NetworkManager-wait-online.service mysqld.service mythbackend.service network-online.target chrony.service
 
@@ -40,7 +40,7 @@ Restart=on-failure
 # How often it should attempt restart
 # You need long enough if at the console to exit and stop mythfrontend
 # Yet be reasonably short duration for waiting on recover after failures
-RestartSec=15
+RestartSec=30
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,1 @@
+mythtv -2 mythtv -2 =mythtv /home/mythtv /bin/sh audio,input,sudo,video,wheel mythtvuser

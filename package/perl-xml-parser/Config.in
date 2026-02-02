@@ -1,0 +1,16 @@
+config BR2_PACKAGE_PERL_XML_PARSER
+	bool "perl-xml-parser"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_LIBXML2
+	select BR2_PACKAGE_ZLIB
+	select BR2_PACKAGE_PERL_XML_NAMESPACESUPPORT # runtime
+	select BR2_PACKAGE_PERL_XML_SAX # runtime
+	select BR2_PACKAGE_PERL_XML_SAX_BASE # runtime
+	select BR2_PACKAGE_PERL_XML_SAX_EXPAT # runtime
+	select BR2_PACKAGE_EXPAT
+	help
+	   xml parsing.
+
+
+comment "perl-xml-parser needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

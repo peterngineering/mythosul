@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_NET_UPNP
+	bool "perl-net-upnp"
+	help
+	  Control interface to UPnP.
+
+	  https://metacpan.org/release/Net-UPnP
